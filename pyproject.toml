@@ -1,0 +1,64 @@
+[project]
+name = "claude-code-langchain"
+version = "0.1.0"
+description = "LangChain chat model for Claude Code, built on the Claude Agent SDK"
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+authors = [
+    { name = "Moésio Filho", email = "moesio.f@gmail.com" }
+]
+requires-python = ">=3.10"
+keywords = ["langchain", "claude", "anthropic", "claude-code", "claude-agent-sdk"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = [
+    "claude-agent-sdk>=0.2.0",
+    "langchain-core>=1.0.0,<2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/moesio-f/claude-code-langchain"
+Repository = "https://github.com/moesio-f/claude-code-langchain"
+Issues = "https://github.com/moesio-f/claude-code-langchain/issues"
+
+[build-system]
+requires = ["uv_build>=0.11.30,<0.12.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.18",
+    "pytest>=8.4",
+    "pytest-asyncio>=1.0",
+    "ruff>=0.13",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "D"]
+ignore = ["D100", "D107", "D203", "D213"]
+pydocstyle.convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D"]
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]
+disallow_untyped_defs = true
+warn_return_any = false
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
